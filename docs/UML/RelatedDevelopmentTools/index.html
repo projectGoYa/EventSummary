@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/mermaid/dist/mermaid.min.css">
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" charset="UTF-8"></script>
+    </head>
+
+    <body>
+        <div class="mermaid">
+            sequenceDiagram
+                participant Alice
+                participant Bob
+                Alice->>Bob: Hello!
+        </div>
+
+        <script>
+            mermaid.initialize({
+                startOnLoad:true
+            });
+        </script>
+    </body>
+</html>
