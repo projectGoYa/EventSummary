@@ -41,9 +41,9 @@
                 Gid ->> Gid : merge・Delete branch
                 Gid ->> Gid : New release 作成
 
-                Gid ->> Gip : pull
-                Gip  ->> Gip : デプロイ
-                Gip ->> 👩‍💻 : Webhook URL 発行
+                Gid ->> GAp : pull
+                GAp  ->> GAp : デプロイ
+                GAp ->> 👩‍💻 : Webhook URL 発行
                 👩‍💻 ->> LOAMp : Webhook URL 登録
                 LOAMp ->> 👩‍💻 : 登録完了通知
                 👩‍💻 ->> 👩‍💻 : テスト・最終確認
