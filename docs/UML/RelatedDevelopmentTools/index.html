@@ -24,15 +24,16 @@
                     👩‍💻 ->> LOAMd : Webhook URL 登録
                     LOAMd ->> 👩‍💻 : 登録完了通知
                     👩‍💻 ->> 👩‍💻 : テスト・レビュー
-                end
 
-                👩‍💻 ->> GAd : 累計デプロイ数の確認
-                alt 累計デプロイ数が<br>200 になったか
-                    GAd ->> GAd : 適用以外のデプロイの<br>アーカイブ
-                    GAd ->> GAd : 過去20件ほどを削除する
-                else 累計デプロイ数が<br>200 になっていない
-                    GAd ->> GAd : 適用以外のデプロイの<br>アーカイブ
+                    👩‍💻 ->> GAd : 累計デプロイ数の確認
+                    alt 累計デプロイ数が<br>200 になったか
+                        GAd ->> GAd : 適用以外のデプロイの<br>アーカイブ
+                        GAd ->> GAd : 過去20件ほどを削除する
+                    else 累計デプロイ数が<br>200 になっていない
+                        Note over GAd : 何もしない
+                    end
                 end
+                GAd ->> GAd : 適用以外のデプロイの<br>アーカイブ
 
                 Note over GAd, Gip : Chrome 拡張機能<br>"Google Apps Script GitHub アシスタント"<br>を利用
                 GAd ->> GAd : git ブランチ作成

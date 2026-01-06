@@ -1,0 +1,59 @@
+```mermaid
+    sequenceDiagram
+        participant 👩‍💻
+        participant GAd as GAS dev
+        participant LOAMd as LINE OAM dev
+        participant Gid as GitHub dev
+
+        participant GAp as GAS prod
+        participant LOAMp as LINE OAM prod
+        participant Gip as GitHub prod
+
+        loop
+            👩‍💻 ->> GAd : プログラミング
+            GAd  ->> GAd : デプロイ
+            GAd ->> 👩‍💻 : Webhook URL 発行
+            👩‍💻 ->> LOAMd : Webhook URL 登録
+            LOAMd ->> 👩‍💻 : 登録完了通知
+            👩‍💻 ->> 👩‍💻 : テスト・レビュー
+
+            👩‍💻 ->> GAd : 累計デプロイ数の確認
+            alt 累計デプロイ数が<br>200 になったか
+                GAd ->> GAd : 適用以外のデプロイの<br>アーカイブ
+                GAd ->> GAd : 過去20件ほどを削除する
+            else 累計デプロイ数が<br>200 になっていない
+                Note over GAd : 何もしない
+            end
+        end
+        GAd ->> GAd : 適用以外のデプロイの<br>アーカイブ
+
+        Note over GAd, Gip : Chrome 拡張機能<br>"Google Apps Script GitHub アシスタント"<br>を利用
+        GAd ->> GAd : git ブランチ作成
+        GAd ->> Gid : push
+        Gid ->> Gid : PR 作成
+        Gid ->> Gid : merge・Delete branch
+        Gid ->> Gid : New release 作成
+
+        Gid ->> GAp : pull
+        GAp  ->> GAp : デプロイ
+        GAp ->> 👩‍💻 : Webhook URL 発行
+        👩‍💻 ->> LOAMp : Webhook URL 登録
+        LOAMp ->> 👩‍💻 : 登録完了通知
+        👩‍💻 ->> 👩‍💻 : テスト・最終確認
+
+        👩‍💻 ->> GAp : 累計デプロイ数の確認
+        alt 累計デプロイ数が<br>200 になったか
+            GAp ->> GAp : 過去数件を削除する
+        else 累計デプロイ数が<br>200 になっていない
+            Note over GAp : 何もしない
+        end
+
+        GAp ->> GAp : git ブランチ作成
+        GAp ->> Gip : push
+        Gip ->> Gip : PR 作成
+        Gip ->> Gip : merge・Delete branch
+        Gip ->> Gip : New release 作成
+
+        Gip ->> 👩‍💻 : タスク完了
+        👩‍💻 ->> 👩‍💻 : 各所リリース報告
+```
